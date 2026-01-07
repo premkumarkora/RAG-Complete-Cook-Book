@@ -88,3 +88,27 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+"""
+Key Observations:
+Comparison with Previous Methods:
+
+Method	ITC-August Chunks	ITC-October Chunks	Strategy
+Naive	46 chunks	44 chunks	Fixed 500 chars
+Recursive	44 chunks	43 chunks	Paragraph/sentence boundaries
+Semantic	7 chunks	6 chunks	Topic shifts
+
+Why So Few Chunks?
+
+The semantic chunker detected that most of the PDF discusses related financial topics (Revenue, EBITDA, Segment performance)
+Instead of arbitrarily cutting every 500 chars, it kept entire topics together
+Notice the huge variation in chunk sizes:
+Smallest: 33 chars (probably a table or header)
+Largest: 8,805 chars (entire discussion about FMCG segment)
+Pros: ✅ Each chunk is about one cohesive topic
+✅ Perfect for Q&A systems (entire context in one chunk)
+✅ No mid-sentence cuts
+
+Cons: ❌ Slower (had to embed every sentence)
+❌ Variable chunk sizes (some very large)
+"""
